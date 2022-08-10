@@ -1,12 +1,10 @@
-#required imports
-# from sympy import *
-# from sympy import roots, solve_poly_system
-# x=symbols('x')
+# required imports
+import numpy as np
+from plot_zplane import zplane
 
-#initialize empty list to store coefficients
+# initialize empty list to store coefficients
 a = []
 b = []
-
 
 #Function for cofficients calculation
 def cofficients(q, name):
@@ -28,8 +26,14 @@ def cofficients(q, name):
 cofficients(n,'numerator')
 cofficients(m,'denominator')
 
+#Making numerator and denominator polynomial using coefficients
+numerator_poly=np.poly1d(a[::-1]) #Have to reverse the list to arrange degree
+denominator_poly = np.poly1d(b[::-1])
 
+#Calculate poles and zeros
+zeros=numerator_poly.r
+poles=denominator_poly.r
+print(zeros,poles)
 
-
-
-    
+#ploting poles and zeros
+zplane(zeros,poles)
